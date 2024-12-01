@@ -43,3 +43,5 @@ const result = distanceBetweenNumbers.reduce((acc, value) => {
 
   return sum;
 }, 0);
+
+console.log(result);
