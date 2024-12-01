@@ -1,15 +1,23 @@
 import { promises } from "fs";
 
-//normal fs.readFile is an async action and won't wait for the result to return.
-//thus, I will use promises to be able to make it async await
-const dataReadFromFile = async () => {
-  try {
-    return await fs.readFile("./utils/day-1-list.txt", { encoding: "utf8" });
-  } catch (error) {
-    console.error("Error reading the file:", error);
-    throw error;
-  }
-};
+const dataReadFromFile = async () =>
+  //normal fs.readFile is an async action and won't wait for the result to return.
+  //thus, I will use promises to be able to make it async await
+  await promises.readFile(
+    "./utils/day-1-list.txt",
+    {
+      encoding: "utf8",
+    },
+    (error, data) => {
+      if (data) {
+        return data;
+      }
+
+      if (error) {
+        console.error(error);
+      }
+    }
+  );
 
 const values = await dataReadFromFile();
 const columnOne = [];
