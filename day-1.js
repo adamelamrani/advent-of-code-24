@@ -1,25 +1,6 @@
-import { promises } from "fs";
+import { dataReadFromFile } from "./utils/helpers/dataReadFromFile.js";
 
-const dataReadFromFile = async () =>
-  //normal fs.readFile is an async action and won't wait for the result to return.
-  //thus, I will use promises to be able to make it async await
-  await promises.readFile(
-    "./utils/day-1-list.txt",
-    {
-      encoding: "utf8",
-    },
-    (error, data) => {
-      if (data) {
-        return data;
-      }
-
-      if (error) {
-        console.error(error);
-      }
-    }
-  );
-
-const values = await dataReadFromFile();
+const values = await dataReadFromFile("./utils/day-1-list.txt");
 const columnOne = [];
 const columnTwo = [];
 const distanceBetweenNumbers = [];
